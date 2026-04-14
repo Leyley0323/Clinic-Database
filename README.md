@@ -24,8 +24,8 @@ This project is a clinic management system that allows users to manage patients,
 - Open a terminal & navigate (cd) into folder 
 - Run "npm install"
 - Start the server "node server.js"
-- Backend will run at http://localhost:3000
+- Backend will run at http://localhost:3000/api/patients
 
 ### 3. Frontend
 - Open index.html file in browser
-  #### Note: Backend (Database + API) must be running for frontend to fetch data from database
+#### Note: Backend (Database + API) must be running for frontend to fetch data from database
