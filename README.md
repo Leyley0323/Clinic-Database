@@ -26,6 +26,6 @@ This project is a clinic management system that allows users to manage patients,
 - Start the server "node server.js"
 - Backend will run at http://localhost:3000
 
-### Frontend
+### 3. Frontend
 - Open index.html file in browser
   #### Note: Backend (Database + API) must be running for frontend to fetch data from database
