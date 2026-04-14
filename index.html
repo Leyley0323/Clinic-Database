@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clinic Management System</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- sidebar nav -->
+    <aside class="sidebar">
+    <div class="sidebar-header">
+        <span class="logo-icon">＋</span>
+        <div>
+        <div class="logo-title">PulsePoint</div>
+        <div class="logo-sub">Clinic Management</div>
+        </div>
+    </div>
+    <nav>
+        <a href="#" class="nav-link active" data-section="dashboard">
+        <span class="nav-icon">✦</span> Dashboard
+        </a>
+        <a href="#" class="nav-link" data-section="patients">
+        <span class="nav-icon">✦</span> Patients
+        </a>
+        <a href="#" class="nav-link" data-section="employees">
+        <span class="nav-icon">✦</span> Employees
+        </a>
+        <a href="#" class="nav-link" data-section="appointments">
+        <span class="nav-icon">✦</span> Appointments
+        </a>
+        <a href="#" class="nav-link" data-section="prescriptions">
+        <span class="nav-icon">✦</span> Prescriptions
+        </a>
+        <a href="#" class="nav-link" data-section="treatedby">
+        <span class="nav-icon">✦</span> Treated By
+        </a>
+    </nav>
+    </aside>
+
+    <!-- Main-->
+    <main class="main">
+    <header class="topbar">
+        <div class="topbar-title" id="page-title">Dashboard</div>
+        <div class="topbar-right">
+        <div id="connection-status" class="status-badge">Connecting…</div>
+        </div>
+    </header>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <!-- Dashboard -->
+    <section id="section-dashboard" class="section active">
+        <div class="stat-grid">
+        <div class="stat-card">
+            <div class="stat-label">Total Patients</div>
+            <div class="stat-value" id="stat-patients">—</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Doctors</div>
+            <div class="stat-value" id="stat-doctors">—</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Appointments</div>
+            <div class="stat-value" id="stat-appointments">—</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Prescriptions</div>
+            <div class="stat-value" id="stat-prescriptions">—</div>
+        </div>
+        </div>
+
+        <div class="dash-panels">
+        <div class="panel">
+            <div class="panel-header">Upcoming Appointments</div>
+            <div id="dash-appointments" class="dash-list">Loading…</div>
+        </div>
+        <div class="panel">
+            <div class="panel-header">Recent Prescriptions</div>
+            <div id="dash-prescriptions" class="dash-list">Loading…</div>
+        </div>
+        </div>
+    </section>
+
+    <!--  Patients  -->
+    <section id="section-patients" class="section">
+        <div class="section-toolbar">
+        <h2 class="section-heading">Patient Records</h2>
+        <button class="btn btn-primary" onclick="openModal('modal-patient')">+ Add Patient</button>
+        </div>
+
+        <div class="table-wrap">
+        <table id="table-patients">
+            <thead>
+            <tr>
+                <th>SSN</th><th>Name</th><th>DOB</th><th>Phone</th><th>Email</th><th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="tbody-patients"><tr><td colspan="6" class="loading-cell">Loading…</td></tr></tbody>
+        </table>
+        </div>
+    </section>
+
+    <!--  Employees  -->
+    <section id="section-employees" class="section">
+        <div class="section-toolbar">
+        <h2 class="section-heading">Employees & Doctors</h2>
+        <button class="btn btn-primary" onclick="openModal('modal-employee')">+ Add Employee</button>
+        </div>
+        <div class="table-wrap">
+        <table id="table-employees">
+            <thead>
+            <tr><th>SSN</th><th>Name</th><th>Role</th><th>Phone</th><th>Email</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="tbody-employees"><tr><td colspan="6" class="loading-cell">Loading…</td></tr></tbody>
+        </table>
+        </div>
+    </section>
+
+    <!--  Appointments  -->
+    <section id="section-appointments" class="section">
+        <div class="section-toolbar">
+        <h2 class="section-heading">Appointments</h2>
+        <button class="btn btn-primary" onclick="openModal('modal-appointment')">+ New Appointment</button>
+        </div>
+        <div class="table-wrap">
+        <table>
+            <thead>
+            <tr><th>ID</th><th>Patient</th><th>Date</th><th>Time</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="tbody-appointments"><tr><td colspan="5" class="loading-cell">Loading…</td></tr></tbody>
+        </table>
+        </div>
+    </section>
+
+    <!-- Prescriptions -->
+    <section id="section-prescriptions" class="section">
+        <div class="section-toolbar">
+        <h2 class="section-heading">Prescriptions</h2>
+        <button class="btn btn-primary" onclick="openModal('modal-prescription')">+ Add Prescription</button>
+        </div>
+        <div class="table-wrap">
+        <table>
+            <thead>
+            <tr><th>ID</th><th>Patient</th><th>Doctor</th><th>Medication</th><th>Dose</th><th>Qty</th><th>Date</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="tbody-prescriptions"><tr><td colspan="8" class="loading-cell">Loading…</td></tr></tbody>
+        </table>
+        </div>
+    </section>
+
+    <!-- Treated By -->
+    <section id="section-treatedby" class="section">
+        <div class="section-toolbar">
+        <h2 class="section-heading">Patient–Doctor Relationships</h2>
+        <button class="btn btn-primary" onclick="openModal('modal-treatedby')">+ Add Relationship</button>
+        </div>
+        <div class="table-wrap">
+        <table>
+            <thead>
+            <tr><th>Patient</th><th>Patient SSN</th><th>Doctor</th><th>Doctor SSN</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="tbody-treatedby"><tr><td colspan="5" class="loading-cell">Loading…</td></tr></tbody>
+        </table>
+        </div>
+    </section>
+
+    </main><!-- /main -->
+
+    <div id="modal-overlay" class="modal-overlay hidden" onclick="closeAllModals()"></div>
+
+    <!-- Patient Modal -->
+    <div id="modal-patient" class="modal hidden">
+    <div class="modal-header">
+        <span id="modal-patient-title">Add Patient</span>
+        <button class="modal-close" onclick="closeAllModals()">✕</button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" id="patient-edit-ssn" />
+        <label>SSN (9 digits) <input id="patient-ssn" maxlength="9" placeholder="123456789" /></label>
+        <label>Full Name <input id="patient-name" placeholder="Jane Doe" /></label>
+        <label>Date of Birth <input id="patient-dob" type="date" /></label>
+        <label>Phone (10 digits) <input id="patient-phone" maxlength="10" placeholder="4075550000" /></label>
+        <label>Email <input id="patient-email" type="email" placeholder="jane@email.com" /></label>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeAllModals()">Cancel</button>
+        <button class="btn btn-primary" onclick="savePatient()">Save</button>
+    </div>
+    </div>
+
+    <!-- Employee Modal -->
+    <div id="modal-employee" class="modal hidden">
+    <div class="modal-header">
+        <span>Add Employee</span>
+        <button class="modal-close" onclick="closeAllModals()">✕</button>
+    </div>
+    <div class="modal-body">
+        <label>SSN (9 digits) <input id="emp-ssn" maxlength="9" placeholder="100000006" /></label>
+        <label>Full Name <input id="emp-name" placeholder="Dr. Jane Doe" /></label>
+        <label>Role
+        <select id="emp-role" onchange="toggleSpecialty()">
+            <option value="Doctor">Doctor</option>
+            <option value="Nurse">Nurse</option>
+            <option value="Receptionist">Receptionist</option>
+            <option value="Admin">Admin</option>
+        </select>
+        </label>
+        <label id="specialty-field">Specialty <input id="emp-specialty" placeholder="e.g. Cardiology" /></label>
+        <label>Phone <input id="emp-phone" maxlength="10" placeholder="4075550000" /></label>
+        <label>Email <input id="emp-email" type="email" placeholder="doc@clinic.com" /></label>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeAllModals()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveEmployee()">Save</button>
+    </div>
+    </div>
+
+    <!-- Appointment Modal -->
+    <div id="modal-appointment" class="modal hidden">
+    <div class="modal-header">
+        <span>New Appointment</span>
+        <button class="modal-close" onclick="closeAllModals()">✕</button>
+    </div>
+    <div class="modal-body">
+        <label>Patient
+        <select id="appt-patient"></select>
+        </label>
+        <label>Date <input id="appt-date" type="date" /></label>
+        <label>Time <input id="appt-time" type="time" /></label>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeAllModals()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveAppointment()">Save</button>
+    </div>
+    </div>
+
+    <!-- Prescription Modal -->
+    <div id="modal-prescription" class="modal hidden">
+    <div class="modal-header">
+        <span>Add Prescription</span>
+        <button class="modal-close" onclick="closeAllModals()">✕</button>
+    </div>
+    <div class="modal-body">
+        <label>Patient <select id="presc-patient"></select></label>
+        <label>Doctor <select id="presc-doctor"><option value="">— None —</option></select></label>
+        <label>Medication <input id="presc-med" placeholder="Amoxicillin" /></label>
+        <label>Dose <input id="presc-dose" placeholder="500mg" /></label>
+        <label>Quantity <input id="presc-qty" type="number" min="1" placeholder="30" /></label>
+        <label>Date <input id="presc-date" type="date" /></label>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeAllModals()">Cancel</button>
+        <button class="btn btn-primary" onclick="savePrescription()">Save</button>
+    </div>
+    </div>
+
+    <!-- Treated By Modal -->
+    <div id="modal-treatedby" class="modal hidden">
+    <div class="modal-header">
+        <span>Add Patient–Doctor Relationship</span>
+        <button class="modal-close" onclick="closeAllModals()">✕</button>
+    </div>
+    <div class="modal-body">
+        <label>Patient <select id="tb-patient"></select></label>
+        <label>Doctor <select id="tb-doctor"></select></label>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeAllModals()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveTreatedBy()">Save</button>
+    </div>
+    </div>
+
+    <script src="app.js"></script>
+    </body>
+    </html>
